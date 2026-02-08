@@ -51,7 +51,7 @@ const MovieCard = ({ movie, reason }) => {
 
                 {/* The "Why" Badge - Premium Glass Look */}
                 <div className="bg-white/10 backdrop-blur-md border border-white/10 p-2 rounded-lg text-xs text-gray-200">
-                    <span className="text-red-400 font-semibold uppercase tracking-wider text-[10px]">Because you liked it:</span>
+                    <span className="text-red-400 font-semibold uppercase tracking-wider text-[10px]">Why you like it:</span>
                     <p className="mt-1 line-clamp-2 leading-relaxed opacity-90">{reason}</p>
                 </div>
             </div>

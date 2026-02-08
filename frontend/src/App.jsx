@@ -91,6 +91,20 @@ function App() {
             </div>
           </form>
 
+          {/* Cold Start Note */}
+          {!hasSearched && !loading && (
+            <div className="mt-4 text-xs text-gray-500 bg-black/30 px-4 py-2 rounded-full inline-block border border-white/5 backdrop-blur-sm">
+              <span className="text-yellow-500 font-bold">⚠️ Note:</span> First search may take 10-20s to wake up the free server.
+            </div>
+          )}
+
+          {/* Loading State Message */}
+          {loading && (
+            <div className="mt-4 text-sm text-gray-400 animate-pulse">
+              Waking up the AI brain... this might take a moment.
+            </div>
+          )}
+
           {/* Error Message */}
           {error && (
             <div className="mt-4 p-4 bg-red-500/10 border border-red-500/20 rounded-lg text-red-200 max-w-md mx-auto animate-fade-in">
