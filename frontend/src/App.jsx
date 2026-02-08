@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Search, Film } from 'lucide-react';
+import { Search, Film, Sparkles, Menu } from 'lucide-react';
 import { getRecommendations } from './api';
 import MovieCard from './components/MovieCard';
 
@@ -8,80 +8,116 @@ function App() {
   const [recommendations, setRecommendations] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [hasSearched, setHasSearched] = useState(false);
 
   const handleSearch = async (e) => {
     e.preventDefault();
-    if (!query) return;
+    if (!query.trim()) return;
 
     setLoading(true);
     setError("");
     setRecommendations([]);
+    setHasSearched(true);
 
     const data = await getRecommendations(query);
 
     if (data && data.recommendations) {
       setRecommendations(data.recommendations);
     } else {
-      setError("Sorry Movie not found, We have limited database . Try another title!");
+      setError("SorryMovie not found, We have a limited database. Please try another title.");
     }
     setLoading(false);
   };
 
   return (
-    <div className="min-h-screen bg-cinema-900 text-white pb-20">
-      {/* Hero Section */}
-      <div className="flex flex-col items-center justify-center py-20 px-4 text-center bg-gradient-to-b from-black to-cinema-900">
-        <Film className="w-16 h-16 text-cinema-500 mb-4" />
-        <h1 className="text-5xl font-extrabold mb-4 tracking-tight">
-          Cinephile <span className="text-cinema-500">AI</span>
-        </h1>
-        <p className="text-gray-400 text-lg max-w-xl mb-8">
-          Discover your next favorite film. Powered by Hybrid AI (Content + Collaborative Filtering), Your first recommendation might take 10 seconds, The successive attempts takes less than 1 sec.
-        </p>
+    <div className="min-h-screen text-white font-sans selection:bg-red-500 selection:text-white">
 
-        {/* Search Bar */}
-        <form onSubmit={handleSearch} className="w-full max-w-md md:max-w-lg relative">
-          <input
-            type="text"
-            placeholder="Enter a movie"
-            className="w-full py-3 md:py-4 px-4 md:px-6 pl-10 md:pl-12 rounded-full bg-cinema-800 text-white border border-gray-700 focus:border-cinema-500 focus:outline-none focus:ring-2 focus:ring-cinema-500/50 transition-all text-base md:text-lg shadow-xl"
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-          />
-          {/* Search Icon */}
-          <Search className="absolute left-3 md:left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4 md:w-5 md:h-5" />
+      {/* Navbar - Glassmorphism */}
+      <nav className="fixed top-0 w-full z-50 px-6 py-4 flex justify-between items-center bg-black/50 backdrop-blur-lg border-b border-white/5">
+        <div className="flex items-center gap-2">
+          <div className="w-8 h-8 bg-gradient-to-br from-red-600 to-red-900 rounded-lg flex items-center justify-center shadow-lg shadow-red-500/20">
+            <Film className="w-5 h-5 text-white" />
+          </div>
+          <span className="text-xl font-bold tracking-tight">Cinephile<span className="text-red-500">.AI</span></span>
+        </div>
+        <button className="p-2 hover:bg-white/10 rounded-full transition-colors">
+          <Menu className="w-6 h-6 text-gray-300" />
+        </button>
+      </nav>
 
-          {/* Button */}
-          <button
-            type="submit"
-            disabled={loading}
-            className="absolute right-1.5 md:right-2 top-1.5 md:top-2 bottom-1.5 md:bottom-2 px-4 md:px-6 bg-cinema-500 hover:bg-red-700 rounded-full font-bold transition-colors disabled:opacity-50 text-sm md:text-base flex items-center"
-          >
-            {loading ? "" : "Recommend"}
-            {loading && (
-              <p className="text-xs text-black-500 mt-2">
-                (Note: The free server might take up to 10s to wake up!)
+      {/* Main Content Area */}
+      <div className={`relative transition-all duration-700 ease-in-out flex flex-col items-center ${hasSearched ? 'pt-32' : 'justify-center min-h-[80vh]'}`}>
+
+        {/* Hero Section */}
+        <div className="text-center px-4 w-full max-w-4xl mx-auto z-10">
+          {!hasSearched && (
+            <div className="mb-8 animate-fade-in">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-sm text-gray-400 mb-6 backdrop-blur-sm">
+                <Sparkles className="w-4 h-4 text-yellow-400" />
+                <span>Powered by Hybrid AI Filtering</span>
+              </div>
+              <h1 className="text-5xl md:text-7xl font-bold mb-6 tracking-tighter bg-clip-text text-transparent bg-gradient-to-b from-white to-gray-400">
+                What to watch next?
+              </h1>
+              <p className="text-lg text-gray-400 max-w-2xl mx-auto leading-relaxed">
+                Stop scrolling for hours. Let our AI analyze plot, cast, and user ratings to find your perfect match.
               </p>
-            )}
-          </button>
-        </form>
+            </div>
+          )}
 
-        {error && <p className="mt-4 text-red-400">{error}</p>}
+          {/* Premium Search Bar */}
+          <form onSubmit={handleSearch} className="w-full max-w-2xl mx-auto relative group">
+            <div className="absolute -inset-1 bg-gradient-to-r from-red-600 to-red-900 rounded-full blur opacity-25 group-hover:opacity-50 transition duration-1000 group-hover:duration-200" />
+            <div className="relative flex items-center bg-[#1a1a1a] rounded-full p-2 border border-white/10 shadow-2xl focus-within:border-red-500/50 focus-within:ring-2 focus-within:ring-red-500/20 transition-all">
+              <Search className="w-6 h-6 text-gray-500 ml-4" />
+              <input
+                type="text"
+                placeholder="Enter a movie "
+                className="w-full bg-transparent border-none text-white text-lg px-4 py-3 focus:ring-0 placeholder-gray-500"
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+              />
+              <button
+                type="submit"
+                disabled={loading}
+                className="bg-white text-black px-8 py-3 rounded-full font-bold hover:bg-gray-200 transition-transform active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {loading ? (
+                  <div className="w-5 h-5 border-2 border-black border-t-transparent rounded-full animate-spin" />
+                ) : (
+                  "Generate"
+                )}
+              </button>
+            </div>
+          </form>
+
+          {/* Error Message */}
+          {error && (
+            <div className="mt-4 p-4 bg-red-500/10 border border-red-500/20 rounded-lg text-red-200 max-w-md mx-auto animate-fade-in">
+              {error}
+            </div>
+          )}
+        </div>
       </div>
 
-      {/* Results Section */}
+      {/* Results Grid */}
       {recommendations.length > 0 && (
-        <div className="container mx-auto px-6">
-          <h2 className="text-2xl font-bold mb-6 border-l-4 border-cinema-500 pl-4">
-            Recommended for you
-          </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+        <div className="container mx-auto px-6 pb-20 mt-12 animate-fade-in">
+          <div className="flex items-center gap-4 mb-8">
+            <div className="h-8 w-1 bg-red-500 rounded-full" />
+            <h2 className="text-2xl font-bold tracking-wide">Curated For You</h2>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {recommendations.map((rec) => (
               <MovieCard key={rec.id} movie={rec} reason={rec.reason} />
             ))}
           </div>
         </div>
       )}
+
+      {/* Footer Decoration */}
+      <div className="fixed bottom-0 left-0 w-full h-32 bg-gradient-to-t from-black to-transparent pointer-events-none z-0" />
     </div>
   );
 }

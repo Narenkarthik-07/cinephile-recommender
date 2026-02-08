@@ -3,7 +3,31 @@
 @tailwind utilities;
 
 body {
-  background-color: #0a0a0a;
-  color: #ffffff;
-  font-family: 'Inter', sans-serif;
+  @apply bg-[#050505] text-white font-sans antialiased;
+  /* Premium dark background with a subtle red glow at the top */
+  background-image:
+    radial-gradient(circle at 50% 0%, #2a0a0a 0%, #050505 60%);
+  min-height: 100vh;
+}
+
+/* Hide scrollbar for cleaner look in horizontal lists if we add them */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Smooth fade-in animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-out forwards;
 }
