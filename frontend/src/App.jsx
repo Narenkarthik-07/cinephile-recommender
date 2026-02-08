@@ -22,7 +22,7 @@ function App() {
     if (data && data.recommendations) {
       setRecommendations(data.recommendations);
     } else {
-      setError("Movie not found. Try another title!");
+      setError("Sorry Movie not found, We have . Try another title!");
     }
     setLoading(false);
   };
@@ -43,7 +43,7 @@ function App() {
         <form onSubmit={handleSearch} className="w-full max-w-lg relative">
           <input
             type="text"
-            placeholder="Enter a movie you love (e.g., Inception, Toy Story)..."
+            placeholder="Enter a movie you Enjoyed"
             className="w-full py-4 px-6 pl-12 rounded-full bg-cinema-800 text-white border border-gray-700 focus:border-cinema-500 focus:outline-none focus:ring-2 focus:ring-cinema-500/50 transition-all text-lg shadow-xl"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
