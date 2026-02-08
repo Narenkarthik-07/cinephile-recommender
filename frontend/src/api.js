@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const API_KEY = "cc0eb85c785d3c9137af68a8c4c9c538"; // 🔴 PASTE YOUR KEY HERE
 const BASE_URL = "https://api.themoviedb.org/3";
-const BACKEND_URL = "http://127.0.0.1:8000";
+const BACKEND_URL = "https://cinephile-ai.onrender.com";
 
 // 1. Get Recommendations from OUR Backend
 export const getRecommendations = async (title) => {
