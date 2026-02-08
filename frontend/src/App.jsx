@@ -24,7 +24,7 @@ function App() {
     if (data && data.recommendations) {
       setRecommendations(data.recommendations);
     } else {
-      setError("SorryMovie not found, We have a limited database. Please try another title.");
+      setError("Sorry Movie not found, Enter the Exact Movie Title and also We have a limited database 5000+ Movies. Please try another title.");
     }
     setLoading(false);
   };
@@ -94,7 +94,7 @@ function App() {
           {/* Cold Start Note */}
           {!hasSearched && !loading && (
             <div className="mt-4 text-xs text-gray-500 bg-black/30 px-4 py-2 rounded-full inline-block border border-white/5 backdrop-blur-sm">
-              <span className="text-yellow-500 font-bold">⚠️ Note:</span> First search may take 10-20s to wake up the free server.
+              <span className="text-yellow-500 font-bold"> Note:</span> First search may take 10-20s to wake up the free server.
             </div>
           )}
 
