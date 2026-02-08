@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_KEY = "cc0eb85c785d3c9137af68a8c4c9c538"; // 🔴 PASTE YOUR KEY HERE
+const API_KEY = "cc0eb85c785d3c9137af68a8c4c9c538"; // Free Tier Key Exposed for Demo Purposes
 const BASE_URL = "https://api.themoviedb.org/3";
 const BACKEND_URL = "https://cinephile-ai.onrender.com";
 
