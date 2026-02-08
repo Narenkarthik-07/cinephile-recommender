@@ -22,7 +22,7 @@ function App() {
     if (data && data.recommendations) {
       setRecommendations(data.recommendations);
     } else {
-      setError("Sorry Movie not found, We have . Try another title!");
+      setError("Sorry Movie not found, We have limited database . Try another title!");
     }
     setLoading(false);
   };
@@ -36,14 +36,14 @@ function App() {
           Cinephile <span className="text-cinema-500">AI</span>
         </h1>
         <p className="text-gray-400 text-lg max-w-xl mb-8">
-          Discover your next favorite film. Powered by Hybrid AI (Content + Collaborative Filtering).
+          Discover your next favorite film. Powered by Hybrid AI (Content + Collaborative Filtering), Your first recommendation might take 10 seconds, The successive attempts takes less than 1 sec.
         </p>
 
         {/* Search Bar */}
         <form onSubmit={handleSearch} className="w-full max-w-md md:max-w-lg relative">
           <input
             type="text"
-            placeholder="Enter movie you enjoyed"
+            placeholder="Enter a movie"
             className="w-full py-3 md:py-4 px-4 md:px-6 pl-10 md:pl-12 rounded-full bg-cinema-800 text-white border border-gray-700 focus:border-cinema-500 focus:outline-none focus:ring-2 focus:ring-cinema-500/50 transition-all text-base md:text-lg shadow-xl"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
