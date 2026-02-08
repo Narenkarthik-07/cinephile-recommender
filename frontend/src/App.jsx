@@ -40,22 +40,24 @@ function App() {
         </p>
 
         {/* Search Bar */}
-        <form onSubmit={handleSearch} className="w-full max-w-lg relative">
+        <form onSubmit={handleSearch} className="w-full max-w-md md:max-w-lg relative">
           <input
             type="text"
-            placeholder="Enter a movie you Enjoyed"
-            className="w-full py-4 px-6 pl-12 rounded-full bg-cinema-800 text-white border border-gray-700 focus:border-cinema-500 focus:outline-none focus:ring-2 focus:ring-cinema-500/50 transition-all text-lg shadow-xl"
+            placeholder="Enter movie you enjoyed"
+            className="w-full py-3 md:py-4 px-4 md:px-6 pl-10 md:pl-12 rounded-full bg-cinema-800 text-white border border-gray-700 focus:border-cinema-500 focus:outline-none focus:ring-2 focus:ring-cinema-500/50 transition-all text-base md:text-lg shadow-xl"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
           />
-          <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+          {/* Search Icon */}
+          <Search className="absolute left-3 md:left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4 md:w-5 md:h-5" />
 
+          {/* Button */}
           <button
             type="submit"
             disabled={loading}
-            className="absolute right-2 top-2 bottom-2 px-6 bg-cinema-500 hover:bg-red-700 rounded-full font-bold transition-colors disabled:opacity-50"
+            className="absolute right-1.5 md:right-2 top-1.5 md:top-2 bottom-1.5 md:bottom-2 px-4 md:px-6 bg-cinema-500 hover:bg-red-700 rounded-full font-bold transition-colors disabled:opacity-50 text-sm md:text-base flex items-center"
           >
-            {loading ? "..." : "Recommend"}
+            {loading ? "" : "Recommend"}
             {loading && (
               <p className="text-xs text-black-500 mt-2">
                 (Note: The free server might take up to 10s to wake up!)
