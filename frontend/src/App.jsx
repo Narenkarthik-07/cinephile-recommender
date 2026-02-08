@@ -55,7 +55,11 @@ function App() {
             disabled={loading}
             className="absolute right-2 top-2 bottom-2 px-6 bg-cinema-500 hover:bg-red-700 rounded-full font-bold transition-colors disabled:opacity-50"
           >
-            {loading ? "..." : "Recommend"}
+            {loading && (
+              <p className="text-xs text-gray-500 mt-2">
+                (Note: The free server might take up to 45s to wake up!)
+              </p>
+            )}
           </button>
         </form>
 
